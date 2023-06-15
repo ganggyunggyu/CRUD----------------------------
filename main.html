@@ -15,14 +15,14 @@
             <button class="btn btn-outline-secondary reload-btn" type="button">브라우저 새로고침</button>
             <button class="btn btn-outline-secondary" type="button">localStorage</button>
         </div>
-        <div class="input-container">
+        <form class="input-container">
             <p>Create</p>
             <div class="input-group">
-                <input type="text" class="form-control input-date" placeholder="" aria-label="Recipient's username with two button addons">
-                <input type="text" class="form-control input-name" placeholder="" aria-label="Recipient's username with two button addons">
+                <input type="text" maxlength="10"  class="form-control input-date border-error" placeholder="날짜">
+                <input type="text" maxlength="10" class="form-control input-name" placeholder="할말">
             </div>
-            <button class="btn btn-outline-secondary create-btn" type="button">등록하기</button>
-        </div>
+            <input class="btn btn-outline-secondary create-btn" type="submit" value="등록하기">
+        </form>
         <div class="del-btn-container"><button class="btn btn-outline-secondary all-del-btn" type="button">전체 삭제</button></div>
         <div class="list-container">
             <div class="flex-list">

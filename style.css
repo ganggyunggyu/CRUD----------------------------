@@ -58,3 +58,6 @@ div > p{
     height: 40px;
     width: 150px;
 }
+.border-error{
+    border-color:1px solid red;
+}
