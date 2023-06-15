@@ -12,13 +12,14 @@ div, body{
     margin-top: 20px;
     width: 50vw;
     padding: 20px;
-    background-color: #ddd;
+    background-color: #eee;
     border-radius: 1rem;
 }
 .input-container{
     height: 15vh;
     padding: 20px;
-    border: 1px solid black;
+    border: 1px solid #ddd;
+    border-radius: 10px;
 }
 .form-control{
     margin: 10px;
@@ -30,8 +31,10 @@ div, body{
     float: right;
 }
 .list-container{
-    border: 1px solid black;
+    border: 1px solid #ddd;
     padding: 10px;
+    margin-bottom: 3px;
+    border-radius: 10px;
 }
 .del-btn-container{
     width: 100%;
@@ -40,12 +43,12 @@ div, body{
 div > p{
     padding-left: 20px;
     margin: 0;
+    
 }
 .flex-list{
     display: flex;
     align-items: center;
     justify-content: space-around;
-
 }
 .name-box, .date-box{
     background-color: white;
