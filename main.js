@@ -7,6 +7,7 @@ const reloadBtn = document.querySelector('.reload-btn');
 const createBtn = document.querySelector('.create-btn');
 const delBtn = document.querySelectorAll('.del-btn');
 const updateBtn = document.querySelectorAll('.update-btn');
+const mainUpBtn = document.querySelector('.main-up-btn');
 
 let nameArr = [];
 let dateArr = [];
@@ -15,30 +16,41 @@ let maxArrayData = 3;
 const textClear = (text) => text.innerHTML = '';
 const valueClear = (text) => text.value = '';
 
-const setArr = (key, arr)=>localStorage.setItem(key, JSON.stringify(arr));
-const getArr = (key)=>JSON.parse(localStorage.getItem(key));
+const setArr = (key, arr) => localStorage.setItem(key, JSON.stringify(arr));
+const getArr = (key) => JSON.parse(localStorage.getItem(key));
 
-if(getArr('name') && getArr('date')){
+const nullCheck = () => {
+    if (inputName.value == '' || inputDate.value == '') {
+        alert('박스를 채워주시오');
+    }
+}
+
+if (getArr('name') && getArr('date')) {
     getArr('name').forEach((el, i) => {
         nameArr.push(el)
         nameBox[i].innerHTML = el;
     });
-    getArr('date').forEach((el, i)=>{
+    getArr('date').forEach((el, i) => {
         dateArr.push(el);
         dateBox[i].innerHTML = el;
+
     });
 }
 
-reloadBtn.addEventListener('click',function(){
+reloadBtn.addEventListener('click', function () {
     window.location.reload();
 })
 
-createBtn.addEventListener('click', function(){
-    if(inputName.value == '' || inputDate.value == ''){
-        alert('박스를 채워주시오');
-    }else{
-        for(let i=0; i<maxArrayData; i++){
-            if(nameArr.length==i && dateArr.length==i){
+createBtn.addEventListener('submit', function (e) {
+    e.preventDefault();
+})
+
+createBtn.addEventListener('click', function () {
+    if (inputName.value == '' || inputDate.value == '') {
+        alert('박스가 비었다');
+    } else {
+        for (let i = 0; i < maxArrayData; i++) {
+            if (nameArr.length == i && dateArr.length == i) {
                 nameArr.push(inputName.value);
                 dateArr.push(inputDate.value);
                 setArr('name', nameArr);
@@ -46,80 +58,67 @@ createBtn.addEventListener('click', function(){
                 const getName = getArr('name');
                 const getDate = getArr('date');
                 nameBox[i].innerHTML = getName[i];
-                dateBox[i].innerHTML = getDate[i];  
+                dateBox[i].innerHTML = getDate[i];
                 valueClear(inputName);
                 valueClear(inputDate);
                 break;
-            }else if(nameArr[i] == '' && dateArr[i] == ''){
+            } else if (nameArr[i] == '' && dateArr[i] == '') {
                 nameArr[i] = inputName.value;
                 dateArr[i] = inputName.value;
                 setArr('name', nameArr);
                 setArr('date', dateArr);
-                const getDate = getArr('date');
                 nameBox[i].innerHTML = getArr('name')[i];
-                dateBox[i].innerHTML = getDate[i];  
+                dateBox[i].innerHTML = getArr('date');[i];
                 valueClear(inputName);
                 valueClear(inputDate);
                 break;
-            }else{
+            } else {
                 continue;
-            } 
+            }
         }
     }
 })
 
-for(let i=0; i<maxArrayData; i++){
-    delBtn[i].addEventListener('click', function(){
+for (let i = 0; i < maxArrayData; i++) {
+    delBtn[i].addEventListener('click', function () {
         nameArr[i] = '';
         dateArr[i] = '';
-        setArr('name',nameArr);
-        setArr('date',dateArr);
+        setArr('name', nameArr);
+        setArr('date', dateArr);
         textClear(dateBox[i]);
         textClear(nameBox[i]);
     })
 }
 
-// delBtn[0].addEventListener('click', function(){
-//     nameArr[0] = '';
-//     dateArr[0] = '';
-//     setArr('name',nameArr);
-//     setArr('date',dateArr);
-//     textClear(dateBox[0]);
-//     textClear(nameBox[0]);
-// })
-// delBtn[1].addEventListener('click', function(){
-//     nameArr[1] = '';
-//     dateArr[1] = '';
-//     setArr('name',nameArr);
-//     setArr('date',dateArr);
-//     textClear(dateBox[1]);
-//     textClear(nameBox[1]);
-// })
-// delBtn[2].addEventListener('click', function(){
-//     nameArr[2] = '';
-//     dateArr[2] = '';
-//     setArr('name',nameArr);
-//     setArr('date',dateArr);
-//     textClear(dateBox[2]);
-//     textClear(nameBox[2]);
-// })
+for (let i = 0; i < updateBtn.length; i++) {
+    updateBtn[i].addEventListener('click', function () {
+        createBtn.classList.add('close')
+        mainUpBtn.classList.remove('close')
+        let getUpNameArr = getArr('name');
+        let getUpDateArr = getArr('date');
+        console.log(getUpNameArr)
+        inputName.value = getUpNameArr[i];
+        inputDate.value = getUpDateArr[i];
+        mainUpBtn.addEventListener('click', function () {
+            createBtn.classList.remove('close')
+            mainUpBtn.classList.add('close')
+            nameArr[i] = inputName.value;
+            dateArr[i] = inputDate.value;
+            setArr('name', nameArr);
+            setArr('date', dateArr);
+        })
+    })
+}
 
-updateBtn[0].addEventListener('click', function(){
-    createBtn.innerHTML = '수정하기';
-    inputName.value = nameArr[0];
-    inputDate.value = dateArr[0];
-})
-
-
-
-allDelBtn.addEventListener('click', function(){
-    for(let i=0; i<dateBox.length; i++){
+allDelBtn.addEventListener('click', function () {
+    for (let i = 0; i < dateBox.length; i++) {
         textClear(nameBox[i]);
         textClear(dateBox[i]);
-        }
+    }
     valueClear(inputName);
     valueClear(inputDate);
-    localStorage.clear();
     nameArr = [];
     dateArr = [];
+    setArr('name', nameArr);
+    setArr('date', dateArr);
 })

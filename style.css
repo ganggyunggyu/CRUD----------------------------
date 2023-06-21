@@ -10,10 +10,11 @@ div, body{
 }
 .container{
     margin-top: 20px;
-    width: 50vw;
+    width: 60vw;
     padding: 20px;
     background-color: #eee;
     border-radius: 1rem;
+    transition: 0.3s;
 }
 .input-container{
     height: 15vh;
@@ -45,6 +46,9 @@ div > p{
     margin: 0;
     
 }
+.p-box{
+    margin-left: 10px;
+}
 .flex-list{
     display: flex;
     align-items: center;
@@ -60,4 +64,31 @@ div > p{
 }
 .border-error{
     border-color:1px solid red;
+}
+.close{
+    display: none;
+}
+.show{
+    display: block;
+}
+
+@media screen and (max-width: 1050px){
+    .container{
+        width: 80vw;
+    }
+    /* .input-container{
+        display: flex;
+        flex-direction: column;
+    } */
+
+}
+@media screen and (max-width: 780px){
+    .container{
+        width: 100vw;
+    }
+    .flex-list{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
